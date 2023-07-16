@@ -18,11 +18,7 @@ public class Huffman {
         EncodeResult res = Huffman.getStringCoder().encode("aabc");
         System.out.println("\nmain");
         System.out.println(res.getZipBytes().length);
-        String s = "asb";
-        byte[] b = s.getBytes();
-        System.out.println(b.length);
-        System.out.println(b[0]);
-        System.out.println(b.toString());
-
+        String s = Huffman.getStringCoder().decode(res);
+        System.out.println(s);
     }
 }

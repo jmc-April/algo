@@ -26,7 +26,11 @@ public class StringCoderImp implements better.StringCoder{
     }
 
     @Override
-    public String decode(String data) {
-        return null;
+    public String decode(EncodeResult encodeResult) {
+        byte[] zipBytes = encodeResult.getZipBytes();
+        Map<String, String> huffmanCode = encodeResult.getHuffmanCode();
+        byte zeroNum = zipBytes[0];
+        System.out.println("zeroNum:"+zeroNum);
+        return "developing";
     }
 }
