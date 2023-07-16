@@ -1,7 +1,5 @@
 package better;
 
-import java.util.Map;
-
 /**
  * @version 1.0
  * @Author xxx
@@ -9,7 +7,7 @@ import java.util.Map;
  * @注释
  */
 public interface StringCoder {
-    Map<String, String> encode(String data);
+    EncodeResult encode(String data);
 
     String decode(String data);
 }

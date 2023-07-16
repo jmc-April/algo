@@ -1,5 +1,6 @@
 package better;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,5 +10,6 @@ import java.util.Map;
  * @注释
  */
 public interface EncodeResult {
-    Map<String, String> HuffmanCode();
+    Map<String, String> getHuffmanCode();
+    byte[] getZipBytes();
 }

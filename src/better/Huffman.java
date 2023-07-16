@@ -15,8 +15,9 @@ public class Huffman {
         return new StringCoderImp();
     }
     public static void main(String[] args) {
-        Map<String, String> res = Huffman.getStringCoder().encode("hello world");
-        System.out.println(res);
+        EncodeResult res = Huffman.getStringCoder().encode("aabc");
+        System.out.println("\nmain");
+        System.out.println(res.getZipBytes().length);
         String s = "asb";
         byte[] b = s.getBytes();
         System.out.println(b.length);
