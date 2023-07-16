@@ -1,4 +1,4 @@
-package better;
+package better.imp;
 
 /**
  * @version 1.0
@@ -35,6 +35,12 @@ public class Node {
     }
     public Node getRight(){
         return right;
+    }
+    public void setLeft(Node left){
+        this.left = left;
+    }
+    public void setRight(Node right){
+        this.right = right;
     }
 }
 
