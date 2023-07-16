@@ -79,6 +79,7 @@ public class BinaryTree {
         while((line = br.readLine()) != null){
             data += line + "\n";
         }
+        System.out.println("data: " + data);
         String input = in.nextLine();
         tr.root = build(data);
         tr.preorder(tr.root, "");
@@ -93,5 +94,8 @@ public class BinaryTree {
         System.out.println(after);
         System.out.println(after.length()); System.out.println("压缩率: " + ratio);
         System.out.println(getdepth(tr.root));
+//        for(int i = 0;i<tr.code.length; i++){
+//            if(tr.code[i] != null) System.out.println((char)i + ": " + tr.code[i]);
+//        }
     }
 }

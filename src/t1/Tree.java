@@ -8,7 +8,7 @@ package t1;
  */
 public class Tree {
     public static void main(String[] args) {
-        int i, j, k, depth =7;
+        int i, j, k, depth = 11;
         for (j = 0; j < depth; j++) {
             int w = 1 << (depth - j + 1);
             if (j == 0) {
