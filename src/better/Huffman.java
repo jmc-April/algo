@@ -15,10 +15,12 @@ public class Huffman {
         return new StringCoderImp();
     }
     public static void main(String[] args) {
-        EncodeResult res = Huffman.getStringCoder().encode("aabc");
+        EncodeResult res = Huffman.getStringCoder().encode("abcdefg");
         System.out.println("\nmain");
         System.out.println(res.getZipBytes().length);
-        String s = Huffman.getStringCoder().decode(res);
+        System.out.println(res.getZipBytes());
+        byte[] zipBytes = res.getZipBytes();
+        String s = Huffman.getStringCoder().decode(zipBytes);
         System.out.println(s);
     }
 }

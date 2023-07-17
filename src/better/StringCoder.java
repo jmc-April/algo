@@ -9,5 +9,5 @@ package better;
 public interface StringCoder {
     EncodeResult encode(String data);
 
-    String decode(EncodeResult encodeResult);
+    String decode(byte[] encodeResult);
 }

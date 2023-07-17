@@ -31,7 +31,8 @@ public class ByteUtils {
         System.out.println("编码:" + encodeText.toString());
         System.out.println(encodeText.length() + " " + huffmanCodeLength);
         int t = encodeText.length() + huffmanCodeLength;
-        byte zeroNum = (byte) (8 - t % 8);//补0的个数
+        int x = (byte)(8 - t % 8);
+        byte zeroNum = (byte) (x == 8 ? 0 : x);//补0的个数
         System.out.println("zeroNum: " + zeroNum);
         byte theKindOfCode = (byte) (map.size()); //码表长度
         for(int i = 0; i < zeroNum; i++){
@@ -66,24 +67,22 @@ public class ByteUtils {
             System.out.print(tableAndEncodeText.charAt(j));
         }
         //print zipBytes
-        System.out.println("print zipBytes");
+        System.out.println("\nprint zipBytes");
         for(int j = 0; j < i; j++){
             System.out.print(zipBytes[j] + " ");
         }
         //print buffer
-        System.out.println("print buffer");
+        System.out.println("\nprint buffer");
         for(int j = 0; j < i; j++){
             System.out.print(buffer.get(j) + " ");
         }
+
         System.out.println();
         System.out.println(buffer.array().length);
         return buffer.array();
     }
 
-    public static String byteToBitString(byte b) {
-        int temp = b;
-        temp |= 256;
-        String s = Integer.toBinaryString(temp);
-        return s.substring(s.length() - 8);
+    public static String bytesToBitString(byte[] data) {
+
     }
 }
