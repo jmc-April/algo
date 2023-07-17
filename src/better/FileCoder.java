@@ -1,5 +1,7 @@
 package better;
 
+import java.io.IOException;
+
 /**
  * @version 1.0
  * @Author xxx
@@ -7,4 +9,8 @@ package better;
  * @注释
  */
 public interface FileCoder {
+
+    EncodeResult encode(String filePath);
+
+    String decode(String filePath) throws IOException;
 }
