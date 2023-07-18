@@ -12,9 +12,10 @@ import better.HuffmanTree;
  * @注释
  */
 public class HuffmanTreeImp implements HuffmanTree {
+    private int depth = 0;
     @Override
-    public Node buildHuffmanTree(String data){
-        PriorityQueue<Node> q = getNode(data);
+    public Node buildHuffmanTree(String data, boolean hasW){
+        PriorityQueue<Node> q = getNode(data, hasW);
         while(q.size() > 1){
             Node left = q.poll();
             Node right = q.poll();
@@ -33,6 +34,65 @@ public class HuffmanTreeImp implements HuffmanTree {
         getHuffmanCode(root, "", map, map1);
         return map;
     }
+
+    @Override
+    public int printTree(Node root, int row, int col, String[][] res) {
+        /** 返回值row表示的是当前节点所在的行数, 这个row将会一直增大
+         * 打印思想: 递归打印左子树, 返回row, 然后打印右子树, 返回row
+         *
+         *
+         */
+        if(root == null){
+            return row;
+        }
+//        setDepth(root);
+        if(root.getData() == null) res[row][col] = "+"; //表示非叶子节点
+        else res[row][col] = root.getData(); //表示叶子节点
+        if(root.getLeft() != null){
+            for(int i = row + 1; i <= row + 2; i++){
+                res[i][col] = "|";
+            }
+            for(int i = col + 1; i <= col + 4; i++){
+                res[row + 2][i] = "_";
+            }
+            row = Math.max(row, printTree(root.getLeft(), row + 2, col + 4, res));
+        }
+        if(root.getRight() != null){
+            for(int i = row + 1; i <= row + 2; i++){
+                res[i][col] = "|";
+            }
+            /**
+             * 从当前row 向上打印"|", 直到遇到第一个不为空的字符串,
+             * 不然无法从当前子树的根节点连接到右节点
+             */
+            for(int i = row; i >= 0; i--){
+                if(res[i][col] != null) break;
+                else res[i][col] = "|";
+            }
+            for(int i = col + 1; i <= col + 4; i++){
+                res[row + 2][i] = "_";
+            }
+            row = Math.max(row, printTree(root.getRight(), row + 2, col + 4, res));
+        }
+        return row;
+    }
+    public void show(Node root){
+        String[][] resA = new String[(int)Math.pow(2, depth)][depth*10];
+        printTree(root, 0, 0, resA);
+        for(int i = 0; i < resA.length; i++){
+            int cnt = 0;
+            for(int j = 0; j < resA[i].length; j++){
+                if(resA[i][j] == null){
+                    resA[i][j] = " ";
+                    cnt++;
+                }
+                System.out.print(resA[i][j]);
+            }
+            System.out.println();
+            if (cnt == resA[i].length) break; //
+        }
+    }
+
     private void getHuffmanCode(Node root, String way, Map<String, String> map, Map<String, String> map1){
         if(root == null){
             return;
@@ -45,20 +105,41 @@ public class HuffmanTreeImp implements HuffmanTree {
         getHuffmanCode(root.getRight(),way + "1", map, map1);
     }
 
-    public PriorityQueue<Node> getNode(String data){
+    public PriorityQueue<Node> getNode(String data, boolean hasW){
         PriorityQueue<Node> q = new PriorityQueue<>((a, b)->(a.getWeight() - b.getWeight()));
         int[] count = new int[256];
         boolean[] st = new boolean[256];
-        for(int i = 0; i < data.length(); i++){
-            count[data.charAt(i)]++;
+        if(!hasW){
+            for(int i = 0; i < data.length(); i++){
+                count[data.charAt(i)]++;
+            }
+            for(int i = 0; i < data.length(); i++){
+                if(!st[data.charAt(i)]){
+                    st[data.charAt(i)] = true;
+                    q.add(new Node(String.valueOf(data.charAt(i)), count[data.charAt(i)]));
+                }
+            }
         }
-        for(int i = 0; i < data.length(); i++){
-            if(!st[data.charAt(i)]){
-                st[data.charAt(i)] = true;
-                q.add(new Node(String.valueOf(data.charAt(i)), count[data.charAt(i)]));
+        else {
+            String[] d = data.split("\n");
+            for(String s : d) {
+                String[] ss = s.split(":");
+                q.add(new Node(ss[0], (int) Double.parseDouble(ss[1])*100));
             }
         }
         return q;
+    }
+    public int getDepth(Node root){
+        if(root == null){
+            return 0;
+        }
+        return Math.max(getDepth(root.getLeft()), getDepth(root.getRight())) + 1;
+    }
+    public void setDepth(Node root){
+        this.depth = getDepth(root);
+    }
+    public int getDepth(){
+        return this.depth;
     }
 
 }

@@ -12,4 +12,6 @@ import java.util.Map;
 public interface EncodeResult {
     Map<String, String> getHuffmanCode();
     byte[] getZipBytes();
+    String getBinString();
+    String countRatio(String data);
 }

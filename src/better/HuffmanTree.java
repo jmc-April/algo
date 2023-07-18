@@ -11,7 +11,9 @@ import java.util.Map;
  * @注释
  */
 public interface HuffmanTree {
-    Node buildHuffmanTree(String data);
+    Node buildHuffmanTree(String data, boolean hasW);
 
     Map<String, String> getHuffmanCode(Node root);
+
+    int printTree(Node root, int row, int col, String[][] res);
 }

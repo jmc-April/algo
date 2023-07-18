@@ -28,7 +28,7 @@ public class FileCoderImp implements better.FileCoder {
             }
             data = sb.toString();
             StringCoderImp sc = new StringCoderImp();
-            EncodeResult encodeResult = sc.encode(data);
+            EncodeResult encodeResult = sc.encode(data, false, data);
             String base64String = Base64.getEncoder().encodeToString(encodeResult.getZipBytes());
             bw.write(base64String);
             bw.flush();
