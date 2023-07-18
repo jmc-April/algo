@@ -2,6 +2,7 @@ package better;
 
 import better.imp.Node;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -15,5 +16,6 @@ public interface HuffmanTree {
 
     Map<String, String> getHuffmanCode(Node root);
 
-    int printTree(Node root, int row, int col, String[][] res);
+    int printTreeHorizontally(Node root, int row, int col, String[][] res);
+    int printTreeVertically(Node root, int row, int col, String[][] res);
 }

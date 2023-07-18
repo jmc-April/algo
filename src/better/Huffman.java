@@ -47,7 +47,7 @@ public class Huffman {
 //
 //        }
 
-        String text2Code = "aabbccccdeeeeeeeeiosdfpnvdouqeirpejndfakdnoqieyrqpefndfvlakhdpqehtopfndfgvqpehtiqnejinfpdnfqew";
+        String text2Code = "aabbcdeee";
         String needToEncode = text2Code;
         EncodeResult res = Huffman.getStringCoder().encode(text2Code, false, needToEncode);
         System.out.println("\nmain");
