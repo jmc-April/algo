@@ -7,7 +7,7 @@ package better;
  * @注释
  */
 public interface StringCoder {
-    EncodeResult encode(String data, boolean hasW, String needToEncode);
+    EncodeResult encode(String data, boolean hasW, String needToEncode, boolean showTree);
 
     String decode(byte[] encodeResult);
     String decode(String binString);

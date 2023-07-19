@@ -29,7 +29,7 @@ public class ByteUtils {
         }
         tableAndEncodeText.append(encodeText);
 //        System.out.println("待编码数据: " + data);
-        System.out.println("待编码数据的二进制结果:" + encodeText.toString());
+        System.out.println("待编码数据的二进制编码结果:" + encodeText.toString());
         int t = encodeText.length() + huffmanCodeLength;
         int x = (byte)(8 - t % 8);
         byte zeroNum = (byte) (x == 8 ? 0 : x);//补0的个数
@@ -43,13 +43,13 @@ public class ByteUtils {
         buffer.put(zeroNum);
         buffer.put((byte) map.size());
         int i = 2;
-        for( Integer value : tableTextLength.values()){
+        for( Integer value : tableTextLength.values()){ // value: 码表每个字符长度
             buffer.put(value.byteValue());
         }
-        for(String key : map.keySet()){
+        for(String key : map.keySet()){ // key: 码表每个字符
             buffer.put(key.getBytes()[0]);
         }
-        for(int j = 0; j < tableAndEncodeText.length(); j += 8){
+        for(int j = 0; j < tableAndEncodeText.length(); j += 8){  // 主体
             String s = tableAndEncodeText.substring(j, j + 8);
             buffer.put((byte) Integer.parseInt(s, 2));
         }
@@ -59,7 +59,6 @@ public class ByteUtils {
 //            System.out.print(tableAndEncodeText.charAt(j));
 //        }
         //print buffer
-        System.out.println();
 //        System.out.println("编码后的全部信息(文件头 + 文件主体):");
 //        for(int j = 0; j < buffer.array().length; j++){
 //            System.out.print(buffer.array()[j] + " ");
@@ -78,7 +77,7 @@ public class ByteUtils {
         Map<Character, String> char_code = new HashMap<>();
         Map<String, Character> code_char = new HashMap<>();
         int i = 2, j = 2 + len, z = 2 + len*2;
-        System.out.println(zipBytes.length);
+//        System.out.println(zipBytes.length);
 //        System.out.println("z"+z);
         String[] dataArray = new String[zipBytes.length];
         for(int i1 = 0; i1 < zipBytes.length; i1++){
@@ -89,16 +88,17 @@ public class ByteUtils {
             dataArray[i1] = y;
         }
         String data = Arrays.toString(zipBytes);
-        System.out.println("byte形式的总编码结果:\n"+data);
-        System.out.println("二进制字符串形式的总编码结果:\n"+Arrays.toString(dataArray));
+//        System.out.println("byte形式的总编码结果:\n"+data);
+//        System.out.println("二进制字符串形式的总编码结果:\n"+Arrays.toString(dataArray));
+
 //        String mainBody = Arrays.toString(Arrays.copyOfRange(zipBytes, 2 + len, zipBytes.length));
         StringBuilder mainBody = new StringBuilder();
         for(int i1 = z; i1 < dataArray.length; i1++){
             mainBody.append(dataArray[i1]);
         }
-        System.out.println("主体文本编码:\n"+mainBody);
+//        System.out.println("主体文本编码:\n"+mainBody);
         String final_res = mainBody.substring(0, mainBody.length() - zeroNum);
-        System.out.println("去除增加的0 :\n"+final_res);
+//        System.out.println("去除增加的0 :\n"+final_res);
         int u = 0; // 用于遍历final_res
         int table_text_len = 0;
         for(; i < 2 + len; i++, j++){

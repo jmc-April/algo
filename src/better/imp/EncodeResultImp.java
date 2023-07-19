@@ -29,9 +29,9 @@ public class EncodeResultImp implements EncodeResult {
     public String getBinString() { // byte数组转化为8位的二进制字符串
         StringBuilder sb = new StringBuilder();
         for (byte b : zipBytes) {
-            String x = Integer.toBinaryString(b & 0xFF);// b&0xFF将byte转化为int，防止丢失高位
+            String x = Integer.toBinaryString(b & 0xFF);// b&0xFF将byte转化为int
             String y = String.format("%08d", Integer.parseInt(x));
-            System.out.print(y + " ");
+//            System.out.print(y + " ");
             sb.append(y);
         }
         System.out.println();
